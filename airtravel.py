@@ -76,7 +76,12 @@ class Flight:
         if self._seating[from_row][from_letter] is None:
             raise ValueError(f"No passenger to relocate in seat {from_seat}")
 
-        to_row
+        to_row, to_letter = self._parse_seat(to_seat)
+        if self._seating[to_row][to_letter][to_letter] is not None:
+            raise ValueError(f"seat {tp_seat} already occupied")
+
+        self._seating[to_row][to_letter] = self._seating[from_row][from_letter]
+        self._seating[from_row][from_letter] = None
 
 class Aircraft:
 
@@ -95,3 +100,14 @@ class Aircraft:
     def seating_plan(self):
         return (range(1, self._num_rows + 1),
                 "ABCDEFJK"[:self._num_seats_per_row])
+
+
+
+def make_flight():
+    f = Flight("BA758", Aircraft("G-EUPT", "Airbus A319", num_rows=22, num_seats_per_row=6))
+    f.allocate_seat("12A", "Ashley Parker")
+    f.allocate_seat("15F", "Karina Narayan")
+    f.allocate_seat("15E", "Sophie Ellis")
+    f.allocate_seat("1C", "Sean Henderson")
+    f.allocate_seat("1D", "Luna The Dog")
+    return f

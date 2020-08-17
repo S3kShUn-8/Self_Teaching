@@ -100,3 +100,14 @@ class Aircraft:
     def seating_plan(self):
         return (range(1, self._num_rows + 1),
                 "ABCDEFJK"[:self._num_seats_per_row])
+
+
+
+def make_flight():
+    f = Flight("BA758", Aircraft("G-EUPT", "Airbus A319", num_rows=22, num_seats_per_row=6))
+    f.allocate_seat("12A", "Ashley Parker")
+    f.allocate_seat("15F", "Karina Narayan")
+    f.allocate_seat("15E", "Sophie Ellis")
+    f.allocate_seat("1C", "Sean Henderson")
+    f.allocate_seat("1D", "Luna The Dog")
+    return f
